@@ -1,4 +1,4 @@
-package ATM;
+package VO;
 
 public class Client {
 	private int clientNo;

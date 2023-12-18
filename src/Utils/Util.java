@@ -1,4 +1,4 @@
-package ATM;
+package Utils;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -7,6 +7,9 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Scanner;
+
+import DAO.AccountDAO;
+import DAO.ClientDAO;
 
 public class Util {
 	private static String CUR_PATH;

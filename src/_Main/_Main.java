@@ -1,4 +1,6 @@
-package ATM;
+package _Main;
+
+import Controller.BankController;
 
 public class _Main {
 

@@ -1,11 +1,14 @@
-package ATM;
+package DAO;
+
+import Utils.Util;
+import VO.Client;
 
 public class ClientDAO {
 	private Client[] clientList;
 	private int maxNo;
 	private int cnt;
 	
-	ClientDAO(){
+	public ClientDAO(){
 		maxNo = 1001;
 	}
 	public void maxNo() {
