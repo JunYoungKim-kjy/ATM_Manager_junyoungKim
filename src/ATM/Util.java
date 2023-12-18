@@ -9,16 +9,17 @@ import java.io.IOException;
 import java.util.Scanner;
 
 public class Util {
-	private String CUR_PATH;
-	public Scanner sc;
+	private static String CUR_PATH;
+	static public Scanner sc;
 	private File file;
-	Util () {
+	private static Util instanace = new Util();
+	private Util () {
 		CUR_PATH = System.getProperty("user.dir") + "\\src\\ATM\\";
 		sc= new Scanner(System.in);
 		fileInit("account.txt");
 		fileInit("client.txt");
 	}
-	private String userData() {
+	private static String userData() {
 		String userdata = "1001/test01/pw1/김철수\n";
 		userdata += "1002/test02/pw2/이영희\n";
 		userdata += "1003/test03/pw3/신민수\n";
@@ -37,7 +38,7 @@ public class Util {
 			}
 		}
 	}
-	private String accountData() {
+	private static String accountData() {
 		String accountdata = "test01/1111-1111-1111/8000\n";
 		accountdata += "test02/2222-2222-2222/5000\n";
 		accountdata += "test01/3333-3333-3333/11000\n";
@@ -48,7 +49,7 @@ public class Util {
 		accountdata += "test04/8888-8888-8888/1000";
 		return accountdata;
 	}
-	public void loadFromFile(AccountDAO accDAO,ClientDAO clientDAO) {
+	public static void loadFromFile(AccountDAO accDAO,ClientDAO clientDAO) {
 		String accData = getDataFromFile("account.txt");
 		String clientData = getDataFromFile("client.txt");
 		if(clientData==null) clientData = userData();
@@ -69,7 +70,7 @@ public class Util {
 			return acc;
 		}
 	}
-	private String getDataFromFile(String fileName) {
+	private static String getDataFromFile(String fileName) {
 		String data = "";
 		try(FileReader fr = new FileReader(CUR_PATH + fileName);
 			BufferedReader br = new BufferedReader(fr);){
@@ -92,14 +93,14 @@ public class Util {
 		return data;
 		
 	}
-	public void saveFromDataToFile(AccountDAO accDAO,ClientDAO clientDAO) {
+	public static void saveFromDataToFile(AccountDAO accDAO,ClientDAO clientDAO) {
 		String accData = accDAO.getSaveData();
 		String clientData = clientDAO.getSaveData();
 		saveToFile("account.txt", accData);
 		saveToFile("client.txt", clientData);
 		
 	}
-	private void saveToFile(String fileName, String data) {
+	private static void saveToFile(String fileName, String data) {
 		try(FileWriter fw = new FileWriter(CUR_PATH + fileName);){
 			fw.write(data);
 			System.out.println(fileName+"파일 저장 성공");
@@ -107,7 +108,7 @@ public class Util {
 			System.out.println(fileName+"파일 저장 실패");
 		}
 	}
-	public int getValue(String msg,int start,int end) {
+	public static int getValue(String msg,int start,int end) {
 		while (true) {
 			System.out.printf("[%s][%d-%d] : ", msg, start, end);
 			try {
@@ -124,7 +125,7 @@ public class Util {
 			}
 		}
 	}
-	public String getStringValue(String msg) {
+	public static String getStringValue(String msg) {
 		System.out.println("[" + msg + "]");
 		return  sc.next();
 	}

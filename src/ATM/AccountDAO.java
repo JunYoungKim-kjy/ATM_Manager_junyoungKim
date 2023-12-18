@@ -4,12 +4,8 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class AccountDAO {
-	Util util;
-	Account[] accList;
+	private Account[] accList;
 	int cnt;
-	AccountDAO() {
-		util = new Util();
-	}
 	public String getSaveData() {
 		String data = "";
 		for(Account acc :accList) {
@@ -68,7 +64,7 @@ public class AccountDAO {
 	private Account getAccountByAccount() {
 		String account = "";
 		while(true) {
-			account = util.getStringValue("계좌번호 (-포함해주세요) [12자리]");
+			account = Util.getStringValue("계좌번호 (-포함해주세요) [12자리]");
 			if(account.length() < 14) {
 				System.out.println("12자리를 입력해주세요.");
 				continue;
@@ -104,8 +100,8 @@ public class AccountDAO {
 		for(Account acc : tempList) {
 			System.out.println(acc);
 		}
-		int idx = util.getValue("입금할 계좌를 선택해주세요.", 0, tempList.length-1);
-		int money = util.getValue("입금할 금액 입력", 1, 1000000);
+		int idx = Util.getValue("입금할 계좌를 선택해주세요.", 0, tempList.length-1);
+		int money = Util.getValue("입금할 금액 입력", 1, 1000000);
 		tempList[idx].setMoney(tempList[idx].getMoney() + money);
 		System.out.println(tempList[idx]);
 		System.out.println("입금완료");
@@ -162,7 +158,7 @@ public class AccountDAO {
 		System.out.println("[ 계좌번호 추가 ]");
 		
 		System.out.println("계좌번호 입력 [예시 "+acc+" ]");
-		acc = util.sc.next();
+		acc = Util.sc.next();
 		Matcher m = p.matcher(acc);
 		System.out.println(m.matches()?"올바른 계좌번호" : "틀린 계좌번호");
 //		String acc1 = util.getAccount4Num();
@@ -192,12 +188,12 @@ public class AccountDAO {
 		for(Account acc : tempList) {
 			System.out.println(acc);
 		}
-		int idx = util.getValue("출금할 계좌를 선택해주세요.", 0, tempList.length-1);
+		int idx = Util.getValue("출금할 계좌를 선택해주세요.", 0, tempList.length-1);
 		if(tempList[idx].getMoney() <= 0) {
 			System.out.println("출금할 잔액이 없습니다.");
 			return;
 		}
-		int money = util.getValue("출금할 금액 입력", 1, tempList[idx].getMoney());
+		int money = Util.getValue("출금할 금액 입력", 1, tempList[idx].getMoney());
 		tempList[idx].setMoney(tempList[idx].getMoney() - money);
 		System.out.println(tempList[idx]);
 		System.out.println("출금완료");
@@ -211,7 +207,7 @@ public class AccountDAO {
 		for(Account acc : tempList) {
 			System.out.println(acc);
 		}
-		int idx = util.getValue("이체할 계좌를 선택해주세요.", 0, (tempList.length-1));
+		int idx = Util.getValue("이체할 계좌를 선택해주세요.", 0, (tempList.length-1));
 		if(tempList[idx].getMoney() <= 0) {
 			System.out.println("이체할 금액이 없습니다.");
 			return;
@@ -228,7 +224,7 @@ public class AccountDAO {
 			System.out.println("같은 계좌에 이체할 수 없습니다.");
 			return;
 		}
-		int money = util.getValue("이체하실 금액을 입력하세요", 1, myAcc.getMoney());
+		int money = Util.getValue("이체하실 금액을 입력하세요", 1, myAcc.getMoney());
 		myAcc.setMoney(myAcc.getMoney() - money);
 		yourAcc.setMoney(yourAcc.getMoney() + money);
 		System.out.println("이체 완료");

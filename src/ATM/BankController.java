@@ -1,16 +1,14 @@
 package ATM;
 
 public class BankController {
-	Util util;
-	AccountDAO accDAO;
-	ClientDAO clientDAO;
-	Client log;
+	private AccountDAO accDAO;
+	private ClientDAO clientDAO;
+	private Client log;
 	
-	BankController(){
-		util = new Util();
+	public BankController(){
 		accDAO = new AccountDAO();
 		clientDAO = new ClientDAO();
-		util.loadFromFile(accDAO, clientDAO);
+		Util.loadFromFile(accDAO, clientDAO);
 	}
 	//[1]관리자 [2]사용 [0] 종료
 	//관리자
@@ -39,7 +37,7 @@ public class BankController {
 	private void adminMenu() {
 		while (true) {
 			System.out.println("[1]회원목록 [2]회원수정 [3]회원삭제 [4]데이터 저장 [5]데이터 로드 [6]전체계좌목록 [0]로그아웃");
-			int sel = util.getValue("관리자메뉴", 0, 6);
+			int sel = Util.getValue("관리자메뉴", 0, 6);
 			if (sel == 0) {
 				System.out.println("[뒤로가기]");
 				return;
@@ -50,9 +48,9 @@ public class BankController {
 			} else if (sel == 3) {
 				clientDAO.deleteClient(accDAO);
 			} else if (sel == 4) {
-				util.saveFromDataToFile(accDAO, clientDAO);
+				Util.saveFromDataToFile(accDAO, clientDAO);
 			} else if (sel == 5) {
-				util.loadFromFile(accDAO, clientDAO);
+				Util.loadFromFile(accDAO, clientDAO);
 			} else if (sel == 6) {
 				accDAO.printAllAccount();
 			}
@@ -61,7 +59,7 @@ public class BankController {
 	private void loginMenu() {
 		while (true) {
 			System.out.println("[1]계좌추가 [2]계좌삭제 [3]입금 [4]출금 [5]이체 [6]탈퇴 [7]마이페이지 [0]로그아웃");
-			int sel = util.getValue("메뉴입력: ", 0, 7);
+			int sel = Util.getValue("메뉴입력: ", 0, 7);
 			if (sel == 0) {
 				System.out.println("[뒤로가기]");
 				return;
@@ -88,7 +86,7 @@ public class BankController {
 	private void userMenu() {
 		while (true) {
 			System.out.println("[1]회원가입 [2]로그인 [0]뒤로가기");
-			int sel = util.getValue("[로그인] 메뉴 : ", 0, 2);
+			int sel = Util.getValue("[로그인] 메뉴 : ", 0, 2);
 			if (sel == 0) {
 				System.out.println("[로그인 메뉴] 종료");
 				return;
@@ -106,7 +104,7 @@ public class BankController {
 	public void run() {
 		while(true) {
 			mainMenu();
-			int sel = util.getValue("메인메뉴", 0, 2);
+			int sel = Util.getValue("메인메뉴", 0, 2);
 			if(sel == 0) {
 				System.out.println("종료");
 				return;

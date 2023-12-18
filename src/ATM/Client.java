@@ -28,7 +28,7 @@ public class Client {
 	public Account[] getAccounts() {
 		return accounts;
 	}
-	Client(int clientNo, String id, String pw, String name) {
+	public Client(int clientNo, String id, String pw, String name) {
 		this.clientNo = clientNo;
 		this.id = id;
 		this.pw = pw;

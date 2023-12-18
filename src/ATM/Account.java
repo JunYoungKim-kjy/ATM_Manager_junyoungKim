@@ -21,7 +21,7 @@ public class Account {
 	public void setMoney(int money) {
 		this.money = money;
 	}
-	Account(String clientId, String account, int money) {
+	public Account(String clientId, String account, int money) {
 		this.clientId = clientId;
 		Account = account;
 		this.money = money;
