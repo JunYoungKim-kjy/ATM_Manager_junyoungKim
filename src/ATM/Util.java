@@ -10,7 +10,7 @@ import java.util.Scanner;
 
 public class Util {
 	private String CUR_PATH;
-	private Scanner sc;
+	public Scanner sc;
 	private File file;
 	Util () {
 		CUR_PATH = System.getProperty("user.dir") + "\\src\\ATM\\";

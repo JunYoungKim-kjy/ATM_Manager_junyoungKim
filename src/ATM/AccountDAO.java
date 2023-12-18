@@ -1,5 +1,8 @@
 package ATM;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 public class AccountDAO {
 	Util util;
 	Account[] accList;
@@ -153,19 +156,27 @@ public class AccountDAO {
 		cnt+=1;
 	}
 	public void insertAccountInClient(Client cl) {
+		String acc ="1111-1111-1111";
+		String accPattern ="^\\d{4}-\\d{4}-\\d{4}$";
+		Pattern p = Pattern.compile(accPattern);
 		System.out.println("[ 계좌번호 추가 ]");
-		String acc1 = util.getAccount4Num();
-		System.out.println(acc1+"-****-****");
-		String acc2 = util.getAccount4Num();
-		System.out.println(acc1+"-"+acc2+"-****");
-		String acc3 = util.getAccount4Num();
-		System.out.printf("%s-%s-%s\n",acc1,acc2,acc3);
-		String account = acc1 + "-" + acc2 + "-" + acc3;
-		if(!hasAccountNum(account)) {
+		
+		System.out.println("계좌번호 입력 [예시 "+acc+" ]");
+		acc = util.sc.next();
+		Matcher m = p.matcher(acc);
+		System.out.println(m.matches()?"올바른 계좌번호" : "틀린 계좌번호");
+//		String acc1 = util.getAccount4Num();
+//		System.out.println(acc1+"-****-****");
+//		String acc2 = util.getAccount4Num();
+//		System.out.println(acc1+"-"+acc2+"-****");
+//		String acc3 = util.getAccount4Num();
+//		System.out.printf("%s-%s-%s\n",acc1,acc2,acc3);
+//		String account = acc1 + "-" + acc2 + "-" + acc3;
+		if(!hasAccountNum(acc)) {
 			System.out.println("존재하는 계좌번호입니다.");
 			return;
 		}
-		addOneAccount(cl.getId(), account, 500);
+		addOneAccount(cl.getId(), acc, 500);
 		System.out.println("[계좌번호 생성 완료]");
 	}
 	private boolean hasAccountNum(String account) {
