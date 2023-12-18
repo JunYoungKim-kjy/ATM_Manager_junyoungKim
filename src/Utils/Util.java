@@ -17,7 +17,8 @@ public class Util {
 	private File file;
 	private static Util instanace = new Util();
 	private Util () {
-		CUR_PATH = System.getProperty("user.dir") + "\\src\\ATM\\";
+		CUR_PATH = System.getProperty("user.dir") + "\\src\\"
+				+ getClass().getPackageName() + "\\";
 		sc= new Scanner(System.in);
 		fileInit("account.txt");
 		fileInit("client.txt");
